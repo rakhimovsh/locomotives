@@ -1,0 +1,24 @@
+{
+  "header": {
+    "nav": {
+      "home": "Asosiy",
+      "about": "Kafedra haqida",
+      "news": "Yangiliklar",
+      "resources": "Fan resurslari",
+      "teachers": "O`qituvchilar"
+    }
+  },
+  "footer": {
+    "contact": "Bog'lanish",
+    "tel": "Telefon",
+    "fax": "Faks",
+    "email": "Email",
+    "networks": "Ijtimoiy sahifalar",
+    "address": "Manzil",
+    "transport": "Jamoat transporti",
+    "appeal": "Murojaat",
+    "fullName": "F.I.Sh",
+    "text": "Xabar",
+    "sendMessage": "Xabar yuborish"
+  }
+}

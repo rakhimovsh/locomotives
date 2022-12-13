@@ -1,0 +1,24 @@
+{
+  "header": {
+    "nav": {
+      "home": "Home",
+      "about": "About the department",
+      "news": "News",
+      "resources": "Science resources",
+      "teachers": "Teachers"
+    }
+  },
+  "footer": {
+    "contact": "Connection",
+    "tel": "Tel",
+    "fax": "Fax",
+    "email": "Email",
+    "networks": "Social networks",
+    "address": "Address",
+    "transport": "Social transport",
+    "appeal": "Appeal",
+    "fullName": "Full name",
+    "text": "Message",
+    "sendMessage": "Send message"
+  }
+}
