@@ -24,7 +24,7 @@ export const addTeacher = (info, image) => (dispatch) => {
       'Content-Type': 'multipart/form-data',
     },
   }).then(({ data }) => {
-    history.push('/panel');
+    history.push('/panel/teachers');
   }).catch(err => {
     httpErrorHandler(err);
     dispatch(teacherSlice.actions.setLoadingAddTeacher(false));
@@ -48,6 +48,7 @@ export const deleteTeacher = (id) => (dispatch) => {
   dispatch(teacherSlice.actions.setDeleteLoading(true));
   api().delete(`/admin/teacher/delete?teacher_id=${id}`).then(({ data }) => {
     dispatch(teacherSlice.actions.setDeleteLoading(false));
+    dispatch(teacherSlice.actions.setDeletedTeacher(false));
   }).catch((err) => {
     httpErrorHandler(err);
     dispatch(teacherSlice.actions.setDeleteLoading(false));
@@ -90,11 +91,31 @@ export const updateTeacher = (info, image) => (dispatch) => {
       dispatch(teacherSlice.actions.setUpdateTeacherLoading(false));
     });
   }).catch((err) => {
-    if (err.response) {
-      dispatch(teacherSlice.actions.setUpdateTeacherError('clientError'));
-    } else {
-      dispatch(teacherSlice.actions.setUpdateTeacherError('serverError'));
-    }
+    const status = httpErrorHandler(err);
     dispatch(teacherSlice.actions.setUpdateTeacherLoading(false));
+  });
+};
+
+export const getUserAllTeachers = (page = 1) => (dispatch) => {
+  api().get(`/client/teacher/all?per_page=10&page=${page}`).then(({ data }) => {
+    batch(() => {
+      dispatch(teacherSlice.actions.setUserAllTeachers(data?.data));
+      dispatch(teacherSlice.actions.setUserAllPages(data?.totalItems));
+      dispatch(teacherSlice.actions.setUserAllTeachersLoading(false));
+    });
+  }).catch((err) => {
+    const status = httpErrorHandler(err);
+    dispatch(teacherSlice.actions.setUserAllTeachersLoading(false));
+  });
+};
+export const getUserSingleTeacher = (teacherId) => (dispatch) => {
+  api().get(`/client/teacher/one?teacher_id=${teacherId}`).then(({ data }) => {
+    batch(() => {
+      dispatch(teacherSlice.actions.setUserSingleTeacher(data?.data[0]));
+      dispatch(teacherSlice.actions.setUserSingleTeacherLoading(false));
+    });
+  }).catch(err => {
+    const status = httpErrorHandler(err);
+    dispatch(teacherSlice.actions.setUserSingleTeacherLoading(false));
   });
 };

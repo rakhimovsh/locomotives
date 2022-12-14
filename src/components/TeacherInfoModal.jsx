@@ -32,7 +32,7 @@ const TeacherInfoModal = ({ isModalOpen, setIsModalOpen, singleTeacherInfo }) =>
     <Modal title="O`qituvchi haqida ma'lumot" open={isModalOpen} onCancel={handleCancel} footer={null} width={700}>
       <InfoContainer>
         <img src={singleTeacherInfo?.picture ? getTeacherImage(singleTeacherInfo?.picture) : null}
-             alt={singleTeacherInfo?.firstName} width={200} />
+             alt={singleTeacherInfo?.firstName} width={300} />
         <InfoWrapper>
           <h2>
             <span>F.I.Sh:</span> {singleTeacherInfo?.lastName + ' ' + singleTeacherInfo?.firstName + ' ' + singleTeacherInfo?.midName}
@@ -45,9 +45,6 @@ const TeacherInfoModal = ({ isModalOpen, setIsModalOpen, singleTeacherInfo }) =>
           </h2>
           <h2>
             <span>Email:</span> {singleTeacherInfo?.email}
-          </h2>
-          <h2>
-            <span>Fanlar:</span> {singleTeacherInfo?.subjects?.map(subject => subject?.name + ', ')}
           </h2>
           <h2>
             <span>Qabul vaqtlari:</span> {singleTeacherInfo?.visit_time}

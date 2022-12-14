@@ -24,6 +24,7 @@ import About from './pages/About';
 import Teachers from './pages/Teachers';
 import News from './pages/News';
 import NewsInfo from './pages/NewsInfo';
+import TeacherInfo from './pages/TeacherInfo.jsx';
 
 //importing lazy loading pages
 const UserLayout = lazy(() => import('./layouts/UserLayout'));
@@ -52,6 +53,7 @@ function App() {
         <Route path="teachers" element={<Teachers />} />
         <Route path="news" element={<News />} />
         <Route path="news/info/:newsId" element={<NewsInfo />} />
+        <Route path='teacher/info/:teacherId' element={<TeacherInfo/>}/>
       </Route>
       <Route path="/admin" element={<Admin />} />
       <Route path="/panel" element={<ProtectedRoute authorized={authorized}>< AdminLayouts /></ProtectedRoute>}>

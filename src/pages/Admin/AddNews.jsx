@@ -63,9 +63,6 @@ const AddNews = () => {
 
   return (
     <div>
-      <BtnWrapper>
-        <Button type="primary" icon={<ArrowLeftOutlined />} onClick={() => navigate(-1)}>Ortga</Button>
-      </BtnWrapper>
       <Form layout="vertical" autoComplete="off" onFinish={handleFinish}>
         <Item rules={[{ required: true, message: 'Maydaon to`ldirilishi shart' }]} label="Sarlavha" name="title">
           <Input.TextArea rows={1} />

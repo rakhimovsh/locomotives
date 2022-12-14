@@ -4,6 +4,7 @@ import Search from 'antd/lib/input/Search';
 import { Button, Form, message, Modal, Table, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { getAllTeachers } from '../../redux/actions/teacher';
 import TeacherColumns from '../../components/TeacherColumns';
@@ -28,36 +29,21 @@ const Header = styled.div`
 `;
 
 const Teachers = () => {
-  const [isDeleted, setIsDeleted] = useState(false);
+  const navigate = useNavigate();
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState('');
   const [singleTeacherInfo, setSingleTeacherInfo] = useState('');
-  const [isAddTeacherModalOpen, setIsAddTeacherOpen] = useState(false);
+  // const [isAddTeacherModalOpen, setIsAddTeacherOpen] = useState(false);
   const dispatch = useDispatch();
-  const { loading, allTeachers, totalPages, updatedTeacher, error } = useSelector(state => state.teacher);
-  const { loading: AuthLoading, error: AuthError, data } = useSelector(state => state.auth);
-  const { i18n } = useTranslation();
-  const columns = TeacherColumns(setIsDeleted, setIsInfoModalOpen, currentPage, setSingleTeacherInfo);
+  const { loading, allTeachers, totalPages, updatedTeacher, deletedTeacher } = useSelector(state => state.teacher);
+  const columns = TeacherColumns(setIsInfoModalOpen, currentPage, setSingleTeacherInfo);
 
 
   useEffect(() => {
     dispatch(getAllTeachers(+currentPage, searchValue));
-  }, [isDeleted, i18n.language, currentPage, updatedTeacher, searchValue]);
+  }, [deletedTeacher, currentPage, updatedTeacher, searchValue]);
 
-
-  const handleAddFrom = (value) => {
-    dispatch(registerTeacher(value));
-  };
-
-  useEffect(() => {
-    if (AuthLoading.register) {
-      setIsAddTeacherOpen(false);
-    }
-    if (data.registeredUser) {
-      message.success('O`qituchvi yaratildi!', 5);
-    }
-  }, [AuthLoading.register, data.registeredUser]);
   return (
     <Wrapper>
       <Header>
@@ -69,7 +55,7 @@ const Teachers = () => {
           size="large"
           onSearch={setSearchValue}
         />
-        <Button type="primary" size="large" onClick={() => setIsAddTeacherOpen(true)}>Qo`shish</Button>
+        <Button type="primary" size="large" onClick={() => navigate('/panel/teachers/add2')}>Qo`shish</Button>
       </Header>
       <Table
         style={{ width: '100%' }}
@@ -87,7 +73,7 @@ const Teachers = () => {
       />
       <TeacherInfoModal isModalOpen={isInfoModalOpen} setIsModalOpen={setIsInfoModalOpen}
                         singleTeacherInfo={singleTeacherInfo} />
-      <Modal
+      {/*      <Modal
         title="O`qituvchi qo`shish"
         open={isAddTeacherModalOpen} footer={null}
         onCancel={() => setIsAddTeacherOpen(false)}
@@ -109,7 +95,7 @@ const Teachers = () => {
             <Button loading={AuthLoading.register} type="primary" htmlType="submit">Qo`shish</Button>
           </Item>
         </Form>
-      </Modal>
+      </Modal>*/}
     </Wrapper>
   )
     ;

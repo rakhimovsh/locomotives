@@ -13,12 +13,15 @@ const initialState = {
   totalPages: null,
   singleTeacherInfo: null,
   updatedTeacher: null,
-  error: {
-    addTeacher: null,
-    getAllTeacher: null,
-    deleteTeacher: null,
+  deletedTeacher: null,
+  user: {
+    allTeachers: [],
     singleTeacher: null,
-    updateTeacher: null,
+    allPages: 1,
+  },
+  userLoading: {
+    allTeachers: true,
+    singleTeacher: true,
   },
 };
 
@@ -38,6 +41,9 @@ export const teacherSlice = createSlice({
     setTotalPages: (state, action) => {
       state.totalPages = action.payload;
     },
+    setDeletedTeacher: (state, action) => {
+      state.deleteTeacher = action.payload;
+    },
     setDeleteLoading: (state, action) => {
       state.loading.deleteTeacher = action.payload;
     },
@@ -53,20 +59,20 @@ export const teacherSlice = createSlice({
     setUpdateTeacherLoading: (state, action) => {
       state.loading.updateTeacher = action.payload;
     },
-    setAllTeachersError: (state, action) => {
-      state.error.getAllTeacher = action.payload;
+    setUserAllTeachers: (state, action) => {
+      state.user.allTeachers = action.payload;
     },
-    setAddTeacherError: (state, action) => {
-      state.error.addTeacher = action.payload;
+    setUserAllTeachersLoading: (state, action) => {
+      state.userLoading.allTeachers = action.payload;
     },
-    setUpdateTeacherError: (state, action) => {
-      state.error.updateTeacher = action.payload;
+    setUserAllPages: (state, action) => {
+      state.user.allPages = action.payload;
     },
-    setSingleTeacherError: (state, action) => {
-      state.error.singleTeacher = action.payload;
+    setUserSingleTeacher: (state, action) => {
+      state.user.singleTeacher = action.payload;
     },
-    setDeleteTeacherError: (state, action) => {
-      state.error.deleteTeacher = action.payload;
+    setUserSingleTeacherLoading: (state, action) => {
+      state.userLoading.singleTeacher = action.payload;
     },
   },
 });

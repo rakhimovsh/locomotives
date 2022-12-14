@@ -42,6 +42,11 @@ const teacherItems = [
   // getItem('Qo`shimcha', '/panel/subject/additional', <BookOutlined />),
 ];
 
+const generalItems = [
+  getItem('Yangiliklar', '/panel/news', <DesktopOutlined />),
+  getItem('O`qituvchilar', '/panel/teachers', <TeamOutlined />),
+];
+
 
 const App = () => {
   const navigate = useNavigate();
@@ -77,7 +82,7 @@ const App = () => {
         }}
       >
         <Menu onClick={handleMenu} theme="dark" mode="inline" defaultSelectedKeys={location.pathname}
-              items={sortItems()} />
+              items={generalItems} />
       </Sider>
       <Layout
         className="site-layout"

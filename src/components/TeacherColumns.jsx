@@ -1,21 +1,13 @@
 import React, { useEffect } from 'react';
 import { Button, message, Popconfirm, Space } from 'antd';
 import { DeleteOutlined, EditOutlined, InfoCircleOutlined } from '@ant-design/icons';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { deleteTeacher } from '../redux/actions/teacher';
 
 
-export default function (setIsDeleted, setIsInfoModalOpen, page, singleTeacherInfo) {
+export default function (setIsInfoModalOpen, page, singleTeacherInfo) {
   const dispatch = useDispatch();
-  const { error } = useSelector(state => state.teacher);
 
-
-  useEffect(() => {
-    if (error) {
-      if (error.updateTeacher === 'serverError') message.warn('Serverda xatolarik yuz berdi. \n Keyinroq urunib ko`ring.');
-      if (error.updateTeacher === 'clientError') message.warn('Ma\'lumot o`chirishning imkoni bo`lmadi');
-    }
-  }, [error]);
   return [
     {
       title: 'No.',
@@ -55,7 +47,6 @@ export default function (setIsDeleted, setIsInfoModalOpen, page, singleTeacherIn
         const confirm = () => {
           dispatch(deleteTeacher(record['_id']));
           message.success('Hodim o`chirildi');
-          setIsDeleted(prev => !prev);
         };
         return (
           <Space size="large">
@@ -63,6 +54,8 @@ export default function (setIsDeleted, setIsInfoModalOpen, page, singleTeacherIn
               setIsInfoModalOpen(true);
               singleTeacherInfo(record);
             }}></Button>
+            <Button type="primary" ghost icon={<EditOutlined />}></Button>
+
             <Popconfirm placement="leftTop" title="O`chirishni tasdiqlaysizmi?" onConfirm={confirm} okText="Ha"
                         cancelText="Yo`q">
               <Button danger icon={<DeleteOutlined />}></Button>

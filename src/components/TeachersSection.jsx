@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Search from 'antd/es/input/Search';
-import { Button } from 'antd';
+import { Avatar, Image, List, Pagination } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Container from './Container';
-import { InfoCircleOutlined } from '@ant-design/icons';
+import { getUserAllTeachers } from '../redux/actions/teacher.js';
+import { getTeacherImage } from '../utils/api.js';
+import { Link } from 'react-router-dom';
 
 
 const Section = styled.section`
@@ -24,39 +27,44 @@ const CustomSearch = styled(Search)`
     max-width: 90%;
   }
 `;
-
-const TeachersList = styled.ul`
-  padding: 0;
-  list-style: none;
-
-  & li {
-    padding-bottom: 20px;
-    display: flex;
-    align-items: flex-start;
-    border-bottom: 1px solid black;
-  }
-
-  & img {
-    border: 0.5px solid #6c6767;
-    margin-right: 20px;
-  }
-
-  & h2 {
-    margin-bottom: 8px;
-    font-size: 20px;
-  }
-
-  & h3 {
-    font-size: 18px;
-  }
-
+const TitleLink = styled(Link)`
+  font-size: 20px;
+`;
+const DescriptionWrapper = styled.div`
   & p {
-    margin-bottom: 5px;
+    margin: 0 0 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+  }
+
+  & span {
+    color: dimgray;
   }
 `;
+const PaginationWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+`;
+
+const Description = (teacher) => (
+  <DescriptionWrapper>
+    <p>Lavozim: <span>{teacher.position}</span></p>
+    <p>Email: <span>{teacher.email}</span></p>
+  </DescriptionWrapper>
+);
 
 const TeachersSection = () => {
+  const dispatch = useDispatch();
+  const { user, userLoading } = useSelector(state => state.teacher);
+  const [page, setPage] = useState(1);
   const onSearch = (value) => console.log(value);
+
+  useEffect(() => {
+    dispatch(getUserAllTeachers(page));
+  }, [page]);
   return (
     <Section>
       <Container>
@@ -67,19 +75,24 @@ const TeachersSection = () => {
           size="large"
           onSearch={onSearch}
         />
-        <TeachersList>
-          <li>
-            <img src="https://picsum.photos/150/180" alt="" />
-            <div>
-              <h2>John Doe</h2>
-              <h3>Professor</h3>
-              <p>Tel: +998908565338</p>
-              <p>Email: <a href="mailto:your@gmail.com">shukurulloh.com@gamil.com</a></p>
-              <p>Qabul vaqtlari: 24/7</p>
-              <Button icon={<InfoCircleOutlined />}>Batafsil </Button>
-            </div>
-          </li>
-        </TeachersList>
+        <List
+          itemLayout="horizontal"
+          loading={userLoading.allTeachers}
+          dataSource={user.allTeachers}
+          renderItem={(item) => {
+            return <List.Item>
+              <List.Item.Meta
+                avatar={<Image width={200} src={getTeacherImage(item.picture)}
+                               style={{ boxShadow: ' rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px' }} />}
+                title={<TitleLink
+                  to={`/teacher/info/${item['_id']}`}>{item.lastName + ' ' + item.firstName + ' ' + item.midName}</TitleLink>}
+                description={Description(item)}
+              />
+            </List.Item>;
+          }}
+        />
+        <PaginationWrapper><Pagination defaultCurrent={1} total={user.allPages}
+                                       onChange={(page) => setPage(page)} /></PaginationWrapper>
       </Container>
     </Section>
   );
