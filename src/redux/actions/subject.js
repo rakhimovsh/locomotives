@@ -7,7 +7,7 @@ import { message } from 'antd';
 
 export const getSubjects = (search = '', courseId = 1, page = 1) => (dispatch) => {
   dispatch(subjectSlice.actions.setLoadingGetSubjects(true));
-  api().get(`/admin/subject/all?search=${search}&course_id=${courseId}&page=${page}&per_page=10`).then(({ data }) => {
+  api().get(`/admin/subject/all?search=${search}&course_id=${courseId}&page=${page}&per_page=20`).then(({ data }) => {
     batch(() => {
       dispatch(subjectSlice.actions.setLoadingGetSubjects(false));
       dispatch(subjectSlice.actions.setSubjects(data?.data));

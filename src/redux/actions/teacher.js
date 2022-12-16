@@ -48,7 +48,7 @@ export const deleteTeacher = (id) => (dispatch) => {
   dispatch(teacherSlice.actions.setDeleteLoading(true));
   api().delete(`/admin/teacher/delete?teacher_id=${id}`).then(({ data }) => {
     dispatch(teacherSlice.actions.setDeleteLoading(false));
-    dispatch(teacherSlice.actions.setDeletedTeacher(false));
+    dispatch(teacherSlice.actions.setDeletedTeacher(data?.data));
   }).catch((err) => {
     httpErrorHandler(err);
     dispatch(teacherSlice.actions.setDeleteLoading(false));

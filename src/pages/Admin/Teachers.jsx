@@ -34,7 +34,6 @@ const Teachers = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState('');
   const [singleTeacherInfo, setSingleTeacherInfo] = useState('');
-  // const [isAddTeacherModalOpen, setIsAddTeacherOpen] = useState(false);
   const dispatch = useDispatch();
   const { loading, allTeachers, totalPages, updatedTeacher, deletedTeacher } = useSelector(state => state.teacher);
   const columns = TeacherColumns(setIsInfoModalOpen, currentPage, setSingleTeacherInfo);
@@ -73,29 +72,6 @@ const Teachers = () => {
       />
       <TeacherInfoModal isModalOpen={isInfoModalOpen} setIsModalOpen={setIsInfoModalOpen}
                         singleTeacherInfo={singleTeacherInfo} />
-      {/*      <Modal
-        title="O`qituvchi qo`shish"
-        open={isAddTeacherModalOpen} footer={null}
-        onCancel={() => setIsAddTeacherOpen(false)}
-      >
-        <Form layout="vertical" onFinish={handleAddFrom} autoComplete="off">
-          <Item label="F.I.Sh" name="fullName" rules={[{ required: true, message: 'Maydon to`ldirilishi shart!' }]}
-                labelAlign="left">
-            <Input />
-          </Item>
-          <Item label="Login" name="login" rules={[{ required: true, message: 'Maydon to`ldirilishi shart!' }]}
-                labelAlign="left">
-            <Input />
-          </Item>
-          <Item label="Parol" name="password" rules={[{ required: true, message: 'Maydon to`ldirilishi shart!' }]}
-                labelAlign="left">
-            <Input />
-          </Item>
-          <Item>
-            <Button loading={AuthLoading.register} type="primary" htmlType="submit">Qo`shish</Button>
-          </Item>
-        </Form>
-      </Modal>*/}
     </Wrapper>
   )
     ;

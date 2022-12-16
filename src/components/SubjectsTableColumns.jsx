@@ -13,7 +13,7 @@ const BtnWrapper = styled.div`
   justify-content: center;
 `;
 
-export default function (setIsSubjectUpdate, setModalOpen, setSubject, navigate) {
+export default function (setModalOpen, setSubject, navigate) {
   const dispatch = useDispatch();
   const { loading } = useSelector(state => state.subject);
   return [
@@ -30,45 +30,6 @@ export default function (setIsSubjectUpdate, setModalOpen, setSubject, navigate)
         return `${record.course_id} - kurs`;
       },
     },
-    {
-      title: 'Ma\'ruza',
-      width: '150px',
-      render: (_, record) => {
-        const handleClick = () => {
-          navigate({
-            pathname: '/panel/subject/lecture/info',
-            search: `?${createSearchParams({ id: record['_id'], name: record.name })}`,
-          });
-        };
-        return <BtnWrapper><Button icon={<PlusOutlined />} onClick={handleClick}></Button></BtnWrapper>;
-      },
-    },
-    {
-      title: 'Amaliyot',
-      width: '150px',
-      render: (_, record) => {
-        const handleClick = () => {
-          navigate({
-            pathname: '/panel/subject/practice/add',
-            search: `?${createSearchParams({ id: record['_id'], name: record.name })}`,
-          });
-        };
-        return <BtnWrapper><Button icon={<PlusOutlined />} onClick={handleClick}></Button></BtnWrapper>;
-      },
-    },
-    {
-      title: 'Labaratoriya',
-      width: '150px',
-      render: (_, record) => {
-        const handleClick = () => {
-          navigate({
-            pathname: '/panel/subject/laboratory/add',
-            search: `?${createSearchParams({ id: record['_id'], name: record.name })}`,
-          });
-        };
-        return <BtnWrapper><Button icon={<PlusOutlined />} onClick={handleClick}></Button></BtnWrapper>;
-      },
-    },
     // {
     //   title: 'Qo\'shimcha',
     //   width: '150px',
@@ -82,7 +43,6 @@ export default function (setIsSubjectUpdate, setModalOpen, setSubject, navigate)
       render: (_, record) => {
         const confirm = () => {
           dispatch(deleteSubject(record['_id']));
-          setIsSubjectUpdate(prev => !prev);
         };
 
         const handleEditBtn = () => {
@@ -91,11 +51,11 @@ export default function (setIsSubjectUpdate, setModalOpen, setSubject, navigate)
         };
         return (
           <Space size="middle">
-            <Button icon={<EditOutlined />} onClick={handleEditBtn}></Button>
+            <Button type="primary" icon={<EditOutlined />} ghost onClick={handleEditBtn}></Button>
             <Popconfirm placement="leftTop" title="O`chirishni tasdiqlaysizmi?"
                         onConfirm={confirm} okText="Ha"
                         cancelText="Yo`q">
-              <Button loading={loading.deleteSubject} type="danger" icon={<DeleteOutlined />}></Button>
+              <Button loading={loading.deleteSubject} type="primary" danger ghost icon={<DeleteOutlined />}></Button>
             </Popconfirm>
           </Space>
         );

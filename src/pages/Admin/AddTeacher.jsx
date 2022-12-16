@@ -58,7 +58,7 @@ const AddTeacher = () => {
     values.additionalInfo = editorValue;
     if (editorValue.trim() && file) {
       dispatch(addTeacher(values, file));
-    } else message.warn('Rasm yoki qo`shimcha ma\'lumotlar kiritilmadi. Tekshirib qaytatdan yuboring.');
+    } else message.warning('Rasm yoki qo`shimcha ma\'lumotlar kiritilmadi. Tekshirib qaytatdan yuboring.');
   };
 
   const handleChange = (e) => {

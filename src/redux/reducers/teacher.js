@@ -42,7 +42,7 @@ export const teacherSlice = createSlice({
       state.totalPages = action.payload;
     },
     setDeletedTeacher: (state, action) => {
-      state.deleteTeacher = action.payload;
+      state.deletedTeacher = action.payload;
     },
     setDeleteLoading: (state, action) => {
       state.loading.deleteTeacher = action.payload;

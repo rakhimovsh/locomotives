@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Button, Input, Modal, Table, Form } from 'antd';
+import { Button, Input, Modal, Table, Form, Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { createSubject, getSubjects, updateSubject } from '../../redux/actions/subject';
 import SubjectsTableColumns from '../../components/SubjectsTableColumns';
@@ -28,37 +28,40 @@ const Subject = () => {
   const [searchValue, setSearchValue] = useState('');
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
-  const [isSubjectUpdated, setIsSubjectUpdated] = useState(false);
   const [subjectToEdit, setSubjectToEdit] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-  const { i18n } = useTranslation();
-  const { courseId } = useParams();
+  const [courseId, setCourseId] = useState(1);
   const [form] = Form.useForm();
   const [updateForm] = Form.useForm();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { loading, subjects, totalPages } = useSelector(state => state.subject);
+  const {
+    loading,
+    subjects,
+    totalPages,
+    createdSubject,
+    updatedSubject,
+    deletedSubject,
+  } = useSelector(state => state.subject);
 
 
   useEffect(() => {
     dispatch(getSubjects(searchValue, courseId, currentPage));
-  }, [searchValue, courseId, isSubjectUpdated, i18n.language]);
+  }, [searchValue, courseId, createdSubject, updatedSubject, deletedSubject]);
 
   const onFinish = (values) => {
     values.course_id = courseId;
     dispatch(createSubject(values));
     setAddModalOpen(false);
-    setIsSubjectUpdated(prev => !prev);
     form.resetFields();
   };
 
-  const columns = SubjectsTableColumns(setIsSubjectUpdated, setIsUpdateModalOpen, setSubjectToEdit, navigate);
+  const columns = SubjectsTableColumns(setIsUpdateModalOpen, setSubjectToEdit, navigate);
 
 
   const onUpdateFinish = (values) => {
     dispatch(updateSubject(subjectToEdit['_id'], values));
-    setIsSubjectUpdated(prev => !prev);
     setIsUpdateModalOpen(false);
   };
   useEffect(() => {
@@ -67,11 +70,34 @@ const Subject = () => {
     }
   }, [subjectToEdit]);
 
+  const handleChange = (evt) => {
+    setCourseId(evt);
+  };
 
   return (
     <>
       <SubjectTop>
-        <Search style={{ width: '50%' }} placeholder="Fan nomi bo'yicha izlash" onSearch={setSearchValue} enterButton />
+        <Search style={{ width: '30%' }} placeholder="Fan nomi bo'yicha izlash" onSearch={setSearchValue} enterButton />
+        <Select
+          defaultValue="1"
+          style={{ width: '150px' }}
+          onChange={handleChange}
+          options={[
+            {
+              value: '1',
+              label: '1-kurs',
+            }, {
+              value: '2',
+              label: '2-kurs',
+            }, {
+              value: '3',
+              label: '3-kurs',
+            }, {
+              value: '4',
+              label: '4-kurs',
+            },
+          ]}
+        />
 
         <Button type="primary" onClick={() => setAddModalOpen(true)}>Qo`shish</Button>
 
@@ -84,6 +110,7 @@ const Subject = () => {
           bordered={true}
           dataSource={subjects}
           columns={columns}
+          onChange={(_, evt) => console.log(evt)}
           pagination={{
             pageSize: 10,
             total: totalPages,

@@ -6,6 +6,9 @@ import {
   ArrowLeftOutlined,
   BookOutlined,
   CloseOutlined,
+  HomeOutlined,
+  InfoCircleOutlined,
+  ExperimentOutlined,
 } from '@ant-design/icons';
 import { Button, Layout, Menu } from 'antd';
 import React, { useEffect, useState } from 'react';
@@ -43,6 +46,10 @@ const teacherItems = [
 ];
 
 const generalItems = [
+  getItem('Asosiy sahifa', '/panel', <HomeOutlined />),
+  getItem('Kafedra haqida', '/panel/about', <InfoCircleOutlined />),
+  getItem('Laboratory ishlari', '/panel/laboratory', <ExperimentOutlined />),
+  getItem('Fanlar', '/panel/subject', <BookOutlined />),
   getItem('Yangiliklar', '/panel/news', <DesktopOutlined />),
   getItem('O`qituvchilar', '/panel/teachers', <TeamOutlined />),
 ];

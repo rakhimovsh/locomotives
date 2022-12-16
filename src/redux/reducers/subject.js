@@ -34,13 +34,13 @@ export const subjectSlice = createSlice({
       state.loading.deleteSubject = action.payload;
     },
     setDeletedSubject: (state, action) => {
-      state.deleteSubject = action.payload;
+      state.deletedSubject = action.payload;
     },
     setLoadingCreatedSubject: (state, action) => {
       state.loading.createSubject = action.payload;
     },
     setCreatedSubject: (state, action) => {
-      state.createSubject = action.payload;
+      state.createdSubject = action.payload;
     },
     setUpdateTeacherLoading: (state, action) => {
       state.loading.updateSubject = action.payload;
