@@ -68,9 +68,8 @@ function App() {
           <Route path="add" element={<AdminAddNews />} />
           <Route path="edit/:newsId" element={<AdminEditNews />} />
         </Route>
-        <Route path="laboratory">
-          <Route index element={<Laboratories />} />
-        </Route>
+        <Route path="laboratory/:subjectId" element={<Laboratories />} />
+        <Route path="laboratory" element={<Laboratories />} />
       </Route>
     </Routes>
   );

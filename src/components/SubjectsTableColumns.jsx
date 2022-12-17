@@ -2,7 +2,7 @@ import { Button, Popconfirm, Space } from 'antd';
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSearchParams } from 'react-router-dom';
+import { createSearchParams, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { deleteSubject } from '../redux/actions/subject';
 
@@ -21,6 +21,9 @@ export default function (setModalOpen, setSubject, navigate) {
       title: 'Fan nomi',
       dataIndex: 'name',
       key: 'name',
+      render: (_, record) => {
+        return <Link to={`/panel/laboratory/${record['_id']}`}>{record.name}</Link>;
+      },
     },
     {
       title: 'Kurs',

@@ -19,7 +19,7 @@ export const signIn = (values) => (dispatch) => {
       });
       localStorage.setItem('PERMISSIONS', JSON.stringify(data?.data?.permissions));
       localStorage.setItem('TOKEN', JSON.stringify(data?.access_token));
-      history.push('/panel/news');
+      history.push('/panel/');
     }
   }).catch((err) => {
     const errorStatus = httpErrorHandler(err);

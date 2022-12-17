@@ -5,11 +5,19 @@ import { httpErrorHandler } from '../../utils/error';
 
 export const getAllLaboratories = (subjectId) => (dispatch) => {
   dispatch(laboratorySlice.actions.setAllLaboratoriesLoading(true));
-  api().get(`/admin/lecture/one?subject_id=${subjectId}`).then(({ data }) => {
+  api().get(subjectId ? `/admin/lecture/one?subject_id=${subjectId}` : `/admin/lecture/all`).then(({ data }) => {
+    let modifiedData = data?.data.map((el) => {
+      el.subjectName = el.subjectId.name;
+      el.courseId = el.subjectId.course_id;
+      el.subjectId = el.subjectId['_id'];
+      return el;
+    });
+    console.log(modifiedData);
     batch(() => {
-      dispatch(laboratorySlice.actions.setAllLaboratories(data?.data));
+      dispatch(laboratorySlice.actions.setAllLaboratories(modifiedData));
       dispatch(laboratorySlice.actions.setAllLaboratoriesLoading(false));
     });
+
   }).catch(err => {
     const status = httpErrorHandler(err);
     dispatch(laboratorySlice.actions.setAllLaboratoriesLoading(false));
