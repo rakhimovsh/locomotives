@@ -1,8 +1,9 @@
 import { Button, Popconfirm, Space } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import React from 'react';
+import { deleteLaboratory } from '../redux/actions/laboratory';
 
-export default function (page) {
+export default function (page, navigate, dispatch) {
   return [
     {
       title: 'No.',
@@ -21,14 +22,22 @@ export default function (page) {
       key: 'subjectId',
     },
     {
+      title: 'Kurs',
+      key: 'courseId',
+      render: (text) => `${text.courseId}-kurs`,
+    },
+    {
       title: 'Amallar',
       key: 'action',
       render: (_, record) => {
-
+        const confirmDelete = () => {
+          dispatch(deleteLaboratory(record['_id']));
+        };
         return (
           <Space size="middle">
-            <Button type="primary" icon={<EditOutlined />} ghost></Button>
-            <Popconfirm placement="leftTop" title="O`chirishni tasdiqlaysizmi?" okText="Ha"
+            <Button type="primary" icon={<EditOutlined />} ghost
+                    onClick={() => navigate(`/panel/laboratory/add/${record['_id']}`)}></Button>
+            <Popconfirm onConfirm={confirmDelete} placement="leftTop" title="O`chirishni tasdiqlaysizmi?" okText="Ha"
                         cancelText="Yo`q">
               <Button type="primary" danger ghost icon={<DeleteOutlined />}></Button>
             </Popconfirm>

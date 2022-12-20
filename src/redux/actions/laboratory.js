@@ -10,9 +10,9 @@ export const getAllLaboratories = (subjectId) => (dispatch) => {
       el.subjectName = el.subjectId.name;
       el.courseId = el.subjectId.course_id;
       el.subjectId = el.subjectId['_id'];
+      el.key = el['_id'];
       return el;
     });
-    console.log(modifiedData);
     batch(() => {
       dispatch(laboratorySlice.actions.setAllLaboratories(modifiedData));
       dispatch(laboratorySlice.actions.setAllLaboratoriesLoading(false));

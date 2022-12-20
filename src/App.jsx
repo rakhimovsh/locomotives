@@ -23,6 +23,7 @@ import Teachers from './pages/Teachers';
 import News from './pages/News';
 import NewsInfo from './pages/NewsInfo';
 import TeacherInfo from './pages/TeacherInfo.jsx';
+import AddLaboratory from './pages/Admin/AddLaboratory.jsx';
 
 //importing lazy loading pages
 const UserLayout = lazy(() => import('./layouts/UserLayout'));
@@ -70,6 +71,8 @@ function App() {
         </Route>
         <Route path="laboratory/:subjectId" element={<Laboratories />} />
         <Route path="laboratory" element={<Laboratories />} />
+        <Route path="laboratory/add" element={<AddLaboratory />} />
+        <Route path="laboratory/add/:laboratoryId" element={<AddLaboratory />} />
       </Route>
     </Routes>
   );
