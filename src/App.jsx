@@ -72,7 +72,6 @@ function App() {
         <Route path="laboratory/:subjectId" element={<Laboratories />} />
         <Route path="laboratory" element={<Laboratories />} />
         <Route path="laboratory/add" element={<AddLaboratory />} />
-        <Route path="laboratory/add/:laboratoryId" element={<AddLaboratory />} />
       </Route>
     </Routes>
   );

@@ -2,6 +2,7 @@ import { Button, Popconfirm, Space } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import React from 'react';
 import { deleteLaboratory } from '../redux/actions/laboratory';
+import { createSearchParams } from 'react-router-dom';
 
 export default function (page, navigate, dispatch) {
   return [
@@ -33,10 +34,19 @@ export default function (page, navigate, dispatch) {
         const confirmDelete = () => {
           dispatch(deleteLaboratory(record['_id']));
         };
+        const handleNavigate = () => {
+          navigate({
+            pathname: '/panel/laboratory/add',
+            search: `?${createSearchParams({
+              subjectId: record.subjectId,
+              laboratoryId: record['_id'],
+            })}`,
+          });
+        };
         return (
           <Space size="middle">
             <Button type="primary" icon={<EditOutlined />} ghost
-                    onClick={() => navigate(`/panel/laboratory/add/${record['_id']}`)}></Button>
+                    onClick={handleNavigate}></Button>
             <Popconfirm onConfirm={confirmDelete} placement="leftTop" title="O`chirishni tasdiqlaysizmi?" okText="Ha"
                         cancelText="Yo`q">
               <Button type="primary" danger ghost icon={<DeleteOutlined />}></Button>

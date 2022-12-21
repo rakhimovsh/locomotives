@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Button, Select, Table } from 'antd';
-import { useParams } from 'react-router-dom';
+import { createSearchParams, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
@@ -27,20 +27,34 @@ const Laboratories = () => {
   const { allLaboratories, loading } = useSelector(state => state.laboratory);
   const [page, setPages] = useState(1);
 
-
   const columns = LaboratoriesColumn(page, navigate, dispatch);
 
   useEffect(() => {
     dispatch(getAllLaboratories(subjectId));
   }, [subjectId]);
 
+  const handleNavigate = () => {
+    navigate({
+      pathname: '/panel/laboratory/add',
+      search: `?${createSearchParams({
+        subjectId: subjectId,
+      })}`,
+    });
+  };
 
   return (
     <>
       <Top>
         <Title>Laboratoriya ishlari</Title>
-        <Button icon={<PlusOutlined />} type="primary"
-                onClick={() => navigate('/panel/laboratory/add')}>Qo'shish</Button>
+        {
+          subjectId ?
+            <Button icon={<PlusOutlined />}
+                    type="primary"
+                    onClick={handleNavigate}
+            >
+              Qo'shish
+            </Button> : <>  </>
+        }
       </Top>
 
       <Table loading={loading.getLaboratories}
