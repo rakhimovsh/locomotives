@@ -96,8 +96,8 @@ export const updateTeacher = (info, image) => (dispatch) => {
   });
 };
 
-export const getUserAllTeachers = (page = 1) => (dispatch) => {
-  api().get(`/client/teacher/all?per_page=10&page=${page}`).then(({ data }) => {
+export const getUserAllTeachers = (page = 1, search = '') => (dispatch) => {
+  api().get(`/client/teacher/all?per_page=10&page=${page}&search=${search}`).then(({ data }) => {
     batch(() => {
       dispatch(teacherSlice.actions.setUserAllTeachers(data?.data));
       dispatch(teacherSlice.actions.setUserAllPages(data?.totalItems));

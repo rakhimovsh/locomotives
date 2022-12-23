@@ -60,11 +60,14 @@ const TeachersSection = () => {
   const dispatch = useDispatch();
   const { user, userLoading } = useSelector(state => state.teacher);
   const [page, setPage] = useState(1);
-  const onSearch = (value) => console.log(value);
+  const [search, setSearch] = useState('');
+  const onSearch = (value) => {
+    setSearch(value);
+  };
 
   useEffect(() => {
-    dispatch(getUserAllTeachers(page));
-  }, [page]);
+    dispatch(getUserAllTeachers(page, search));
+  }, [page, search]);
   return (
     <Section>
       <Container>

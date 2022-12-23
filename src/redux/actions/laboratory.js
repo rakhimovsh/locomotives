@@ -64,3 +64,16 @@ export const deleteLaboratory = (laboratoryId) => (dispatch) => {
 };
 
 
+export const getUserAllLaboratories = (subjectId) => (dispatch) => {
+  dispatch(laboratorySlice.actions.setUserAllLaboratoriesLoading(true));
+  api().get(`/client/lecture/all?per_page=10&page=1&subject_id=${subjectId}`).then(({ data }) => {
+    batch(() => {
+      dispatch(laboratorySlice.actions.setUserAllLaboratories(data?.data));
+      dispatch(laboratorySlice.actions.setUserAllLaboratoriesLoading(false));
+    });
+  }).catch(err => {
+    const status = httpErrorHandler(err);
+    dispatch(laboratorySlice.actions.setUserAllLaboratoriesLoading(false));
+  });
+};
+

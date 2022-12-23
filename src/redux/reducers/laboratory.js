@@ -6,11 +6,13 @@ const initialState = {
   updatedLaboratory: null,
   deletedLaboratory: null,
   totalPages: 1,
+  userAllLaboratories: [],
   loading: {
     getLaboratories: false,
     createLaboratory: false,
     updateLaboratory: false,
     deleteLaboratory: false,
+    userAllLaboratories: false,
   },
 };
 
@@ -44,6 +46,12 @@ export const laboratorySlice = createSlice({
     },
     setTotalPages: (state, action) => {
       state.totalPages = action.payload;
+    },
+    setUserAllLaboratories: (state, action) => {
+      state.userAllLaboratories = action.payload;
+    },
+    setUserAllLaboratoriesLoading: (state, action) => {
+      state.loading.userAllLaboratories = action.payload;
     },
   },
 });

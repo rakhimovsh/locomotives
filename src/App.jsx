@@ -24,6 +24,9 @@ import News from './pages/News';
 import NewsInfo from './pages/NewsInfo';
 import TeacherInfo from './pages/TeacherInfo.jsx';
 import AddLaboratory from './pages/Admin/AddLaboratory.jsx';
+import Subjects from './pages/Subjects.jsx';
+import LaboratoriesUser from './pages/Laboratories.jsx';
+import AdminHome from './pages/Admin/Home.jsx';
 
 //importing lazy loading pages
 const UserLayout = lazy(() => import('./layouts/UserLayout'));
@@ -50,12 +53,14 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="teachers" element={<Teachers />} />
         <Route path="news" element={<News />} />
+        <Route path="subjects" element={<Subjects />} />
+        <Route path="laboratories/:subjectId" element={<LaboratoriesUser />} />
         <Route path="news/info/:newsId" element={<NewsInfo />} />
         <Route path="teacher/info/:teacherId" element={<TeacherInfo />} />
       </Route>
       <Route path="/admin" element={<Admin />} />
       <Route path="/panel" element={<ProtectedRoute authorized={authorized}>< AdminLayouts /></ProtectedRoute>}>
-        <Route index element={<TeacherHome />} />
+        <Route index element={<AdminHome />} />
         <Route path="teachers">
           <Route index element={<AdminTeachers />} />
           <Route path="add2" element={<AdminAdd />} />

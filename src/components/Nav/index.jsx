@@ -43,6 +43,8 @@ const Index = () => {
           <li><Link href="https://student.tstu.uz/">HEMIS</Link></li>
           <li><Navlink className={location.pathname == '/teachers' ? 'atived' : ''}
                        to="/teachers">{t('header.nav.teachers')}</Navlink></li>
+          <li><Navlink className={location.pathname == '/subjects' ? 'atived' : ''}
+                       to="/subjects">Laboratoriya</Navlink></li>
           <li><LanguageSelect /></li>
         </NavList>
       </NavEl>
