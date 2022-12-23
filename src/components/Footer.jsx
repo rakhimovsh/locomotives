@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import Container from './Container';
 import AppealForm from './AppealForm';
 
-import YandexMap from './YandexMap';
 
 import instagram from '../assets/images/instagram.png';
 import facebook from '../assets/images/facebook.png';
@@ -109,11 +108,10 @@ const Footer = () => {
             <Header>{t('footer.address')}</Header>
             <Apdress>{t('footer.address')}: <span>Toshkent shahar Mirobod tumani Temiryo’lchilar ko’chasi 1-uy</span></Apdress>
             <Apdress>{t('footer.transport')}: <span>12, 40, 46, 52, 61, 66, 106</span></Apdress>
-            <YandexMap />
           </Col>
           <Col xs={24} sm={24} md={24} lg={8} xl={8}>
-            <Header>{t('footer.appeal')}</Header>
-            <AppealForm />
+            {/*<Header>{t('footer.appeal')}</Header>*/}
+            {/*<AppealForm />*/}
           </Col>
         </Row>
       </Container>

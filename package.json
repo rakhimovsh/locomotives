@@ -23,6 +23,7 @@
     "i18next-http-backend": "^2.0.2",
     "npm": "^9.2.0",
     "react": "^18.2.0",
+    "react-countup": "^6.4.0",
     "react-dom": "^18.2.0",
     "react-easy-crop": "^4.6.3",
     "react-i18next": "^12.1.1",
