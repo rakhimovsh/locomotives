@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { Row, Col, Image, Divider, Button, Skeleton, Form, Input, Modal } from 'antd';
 import { EditOutlined, PlusOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-
+import { useParams } from 'react-router-dom';
 import DefaultUser from '../../assets/images/default_user.png';
 import { getSingleTeacher, updateTeacher } from '../../redux/actions/teacher';
 import { getTeacherImage } from '../../utils/api';
@@ -86,7 +85,7 @@ const InfoComponent = ({ label, loading, name }) => {
 
 const TeacherHome = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { teacherId } = useParams();
   const [editorValue, setEditorValue] = useState('');
   const [file, setFile] = useState(null);
   const [photoURL, setPhotoURL] = useState();
@@ -94,7 +93,7 @@ const TeacherHome = () => {
   const { singleTeacherInfo, loading } = useSelector(state => state.teacher);
 
   useEffect(() => {
-    dispatch(getSingleTeacher());
+    dispatch(getSingleTeacher(teacherId));
   }, [loading.updateTeacher]);
 
   const [form] = Form.useForm();
@@ -104,7 +103,7 @@ const TeacherHome = () => {
 
   const handleFinish = (values) => {
     values.additionalInfo = editorValue ? editorValue : singleTeacherInfo.additionalInfo;
-    dispatch(updateTeacher(values, file));
+    dispatch(updateTeacher(values, file, teacherId));
   };
   const handleChange = (e) => {
     const file = e.target.files[0];

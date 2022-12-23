@@ -10,7 +10,6 @@ import ProtectedRoute from './utils/ProtectedRoute';
 import { checkExisting } from './redux/actions/auth';
 
 //importing pages
-import TeacherHome from './pages/Admin/TeacherHome';
 import AdminTeachers from './pages/Admin/Teachers';
 import AdminAdd from './pages/Admin/AddTeacher';
 import AdminSubjects from './pages/Admin/Subject';
@@ -27,6 +26,8 @@ import AddLaboratory from './pages/Admin/AddLaboratory.jsx';
 import Subjects from './pages/Subjects.jsx';
 import LaboratoriesUser from './pages/Laboratories.jsx';
 import AdminHome from './pages/Admin/Home.jsx';
+import AdminAbout from './pages/Admin/About.jsx';
+import UpdateTeacher from './pages/Admin/UpdateTeacher.jsx';
 
 //importing lazy loading pages
 const UserLayout = lazy(() => import('./layouts/UserLayout'));
@@ -61,9 +62,11 @@ function App() {
       <Route path="/admin" element={<Admin />} />
       <Route path="/panel" element={<ProtectedRoute authorized={authorized}>< AdminLayouts /></ProtectedRoute>}>
         <Route index element={<AdminHome />} />
+        <Route path="about" element={<AdminAbout />} />
         <Route path="teachers">
           <Route index element={<AdminTeachers />} />
           <Route path="add2" element={<AdminAdd />} />
+          <Route path="update/:teacherId" element={<UpdateTeacher />} />
         </Route>
         <Route path="subject">
           <Route index element={<AdminSubjects />} />

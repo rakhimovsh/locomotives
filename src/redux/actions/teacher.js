@@ -55,7 +55,7 @@ export const deleteTeacher = (id) => (dispatch) => {
   });
 };
 
-export const getSingleTeacher = () => (dispatch) => {
+export const getSingleTeacher = (teacherId) => (dispatch) => {
   api().get(`/admin/teacher/one`).then(({ data }) => {
     batch(() => {
       dispatch(teacherSlice.actions.setSingleTeacherLoading(false));
@@ -71,7 +71,7 @@ export const getSingleTeacher = () => (dispatch) => {
   });
 };
 
-export const updateTeacher = (info, image) => (dispatch) => {
+export const updateTeacher = (info, image, teacherId) => (dispatch) => {
   dispatch(teacherSlice.actions.setUpdateTeacherLoading(true));
   const formData = new FormData();
   console.log(info);
@@ -81,7 +81,7 @@ export const updateTeacher = (info, image) => (dispatch) => {
   if (image) {
     formData.append('picture', image, 'blob.picture.jpeg');
   }
-  api().put(`/admin/teacher/update`, formData, {
+  api().put(`/admin/teacher/update?teacher_id=${teacherId}`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
