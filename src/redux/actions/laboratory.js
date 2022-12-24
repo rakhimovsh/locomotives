@@ -2,6 +2,7 @@ import { batch } from 'react-redux';
 import { laboratorySlice } from '../reducers/laboratory.js';
 import { api } from '../../utils/api';
 import { httpErrorHandler } from '../../utils/error';
+import history from '../../utils/history.js';
 
 export const getAllLaboratories = (subjectId) => (dispatch) => {
   dispatch(laboratorySlice.actions.setAllLaboratoriesLoading(true));
@@ -31,6 +32,7 @@ export const createLaboratory = (subjectId, data) => (dispatch) => {
       dispatch(laboratorySlice.actions.setCreatedLaboratory(data?.data));
       dispatch(laboratorySlice.actions.setCreatedLaboratoryLoading(false));
     });
+    history.push('/panel/laboratory');
   }).catch(err => {
     const status = httpErrorHandler(err);
     dispatch(laboratorySlice.actions.setCreatedLaboratoryLoading(false));

@@ -11,9 +11,9 @@ export function httpErrorHandler(error) {
 
 
     if (error.code === 'ERR_NETWORK') {
-      message.error('Qurilmada internet yoniqligiga e\'tibor bering!', 5);
+      message.error('Serverga ulanishda xatolik yuz berdi', 5);
     } else if (error.code === 'ERR_CANCELED') {
-      message.error('ulanish bekor qilindi..', 5);
+      message.error('Ulanish bekor qilindi..', 5);
     }
     if (response) {
       const statusCode = response?.status;
