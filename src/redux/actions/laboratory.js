@@ -67,8 +67,15 @@ export const deleteLaboratory = (laboratoryId) => (dispatch) => {
 export const getUserAllLaboratories = (subjectId) => (dispatch) => {
   dispatch(laboratorySlice.actions.setUserAllLaboratoriesLoading(true));
   api().get(`/client/lecture/all?per_page=10&page=1&subject_id=${subjectId}`).then(({ data }) => {
+    let modifiedData = data?.data.map((el) => {
+      el.subjectName = el.subjectId.name;
+      el.courseId = el.subjectId.course_id;
+      el.subjectId = el.subjectId['_id'];
+      el.key = el['_id'];
+      return el;
+    });
     batch(() => {
-      dispatch(laboratorySlice.actions.setUserAllLaboratories(data?.data));
+      dispatch(laboratorySlice.actions.setUserAllLaboratories(modifiedData));
       dispatch(laboratorySlice.actions.setUserAllLaboratoriesLoading(false));
     });
   }).catch(err => {
@@ -77,3 +84,11 @@ export const getUserAllLaboratories = (subjectId) => (dispatch) => {
   });
 };
 
+
+export const getUserSingleLaboratory = (laboratoryId) => (dispatch) => {
+  api().get(`/client/lecture/one?lecture_id=${laboratoryId}`).then(({ data }) => {
+    dispatch(laboratorySlice.actions.setUserSingleLaboratory(data?.data[0]));
+  }).catch(err => {
+    const status = httpErrorHandler(err);
+  });
+};

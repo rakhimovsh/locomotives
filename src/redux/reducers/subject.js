@@ -18,6 +18,7 @@ const initialState = {
   createdSubject: null,
   updatedSubject: null,
   totalPages: 1,
+  userSubjects: [],
 };
 
 export const subjectSlice = createSlice({
@@ -62,6 +63,9 @@ export const subjectSlice = createSlice({
     },
     setTotalPages: (state, action) => {
       state.totalPages = action.payload;
+    },
+    setUserSubjects: (state, action) => {
+      state.userSubjects = action.payload;
     },
   },
 });

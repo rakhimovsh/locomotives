@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Col, Row, Select, Spin } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { createSearchParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Container from '../components/Container.jsx';
-import { getSubjects } from '../redux/actions/subject.js';
+import { getSubjects, getUserSubjects } from '../redux/actions/subject.js';
 
 
 const Wrapper = styled.div`
@@ -30,13 +30,13 @@ const Card = styled.div`
 
 const Subjects = () => {
   const dispatch = useDispatch();
-  const { subjects, loading } = useSelector(state => state.subject);
+  const { userSubjects } = useSelector(state => state.subject);
   const [course, setCourse] = useState(1);
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getSubjects('', course, page));
+    dispatch(getUserSubjects(page, course));
   }, [course, page]);
 
   const handleChange = (value) => {
@@ -70,22 +70,24 @@ const Subjects = () => {
             ]}
           />
         </div>
-        {
-          loading.getSubjects ?
-            <Spin size="large" />
-            :
-            <Row gutter={20} style={{ marginTop: 35 }}>
-              {
-                subjects?.map(subject => (
-                  <Col span={4} key={subject['_id']}>
-                    <Card onClick={() => navigate(`/laboratories/${subject['_id']}`)}>
-                      {subject?.name}
-                    </Card>
-                  </Col>
-                ))
-              }
-            </Row>
-        }
+        <Row gutter={20} style={{ marginTop: 35 }}>
+          {
+            userSubjects?.map(subject => (
+              <Col span={4} key={subject['_id']}>
+                <Card onClick={() => navigate({
+                  pathname: '/laboratories',
+                  search: `?${createSearchParams({
+                    id: subject['_id'],
+                    name: subject.name,
+                  })}`,
+                })}>
+                  {subject?.name}
+                </Card>
+              </Col>
+            ))
+          }
+        </Row>
+
       </Wrapper>
     </Container>
   );

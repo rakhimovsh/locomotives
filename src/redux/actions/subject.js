@@ -60,3 +60,11 @@ export const updateSubject = (id, subject) => (dispatch) => {
     dispatch(subjectSlice.actions.setUpdateTeacherLoading(false));
   });
 };
+
+export const getUserSubjects = (page, courseId) => (dispatch) => {
+  api().get(`/client/subject/all?search=&course_id=${courseId}&page=${page}&per_page=10`).then(({ data }) => {
+    dispatch(subjectSlice.actions.setUserSubjects(data?.data));
+  }).catch(err => {
+    const status = httpErrorHandler(err);
+  });
+};

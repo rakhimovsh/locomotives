@@ -28,6 +28,7 @@ import LaboratoriesUser from './pages/Laboratories.jsx';
 import AdminHome from './pages/Admin/Home.jsx';
 import AdminAbout from './pages/Admin/About.jsx';
 import UpdateTeacher from './pages/Admin/UpdateTeacher.jsx';
+import LaboratoryInfo from './pages/LaboratoryInfo.jsx';
 
 //importing lazy loading pages
 const UserLayout = lazy(() => import('./layouts/UserLayout'));
@@ -55,7 +56,9 @@ function App() {
         <Route path="teachers" element={<Teachers />} />
         <Route path="news" element={<News />} />
         <Route path="subjects" element={<Subjects />} />
-        <Route path="laboratories/:subjectId" element={<LaboratoriesUser />} />
+        <Route path="laboratories" element={<LaboratoriesUser />} />
+        <Route path="laboratories/info/:laboratoryId" element={<LaboratoryInfo
+        />} />
         <Route path="news/info/:newsId" element={<NewsInfo />} />
         <Route path="teacher/info/:teacherId" element={<TeacherInfo />} />
       </Route>

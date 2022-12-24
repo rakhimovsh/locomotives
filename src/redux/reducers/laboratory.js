@@ -7,6 +7,7 @@ const initialState = {
   deletedLaboratory: null,
   totalPages: 1,
   userAllLaboratories: [],
+  userSingleLaboratory: null,
   loading: {
     getLaboratories: false,
     createLaboratory: false,
@@ -52,6 +53,9 @@ export const laboratorySlice = createSlice({
     },
     setUserAllLaboratoriesLoading: (state, action) => {
       state.loading.userAllLaboratories = action.payload;
+    },
+    setUserSingleLaboratory: (state, action) => {
+      state.userSingleLaboratory = action.payload;
     },
   },
 });
