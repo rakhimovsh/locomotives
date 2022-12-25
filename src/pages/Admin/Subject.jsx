@@ -57,9 +57,7 @@ const Subject = () => {
     form.resetFields();
   };
 
-  const columns = SubjectsTableColumns(setIsUpdateModalOpen, setSubjectToEdit, navigate);
-
-
+  const columns = SubjectsTableColumns(setIsUpdateModalOpen, setSubjectToEdit, dispatch);
   const onUpdateFinish = (values) => {
     dispatch(updateSubject(subjectToEdit['_id'], values));
     setIsUpdateModalOpen(false);

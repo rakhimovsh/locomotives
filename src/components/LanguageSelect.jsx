@@ -47,6 +47,7 @@ const LanguageSelect = () => {
   const { i18n } = useTranslation();
   const handleChange = (lang) => {
     i18n.changeLanguage(lang);
+    window.location.reload();
   };
   const { Option } = Select;
 

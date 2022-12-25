@@ -25,7 +25,7 @@ export const getAllLaboratories = (subjectId) => (dispatch) => {
   });
 };
 
-export const createLaboratory = (subjectId, data) => (dispatch) => {
+export const createLaboratory = (data) => (dispatch) => {
   dispatch(laboratorySlice.actions.setCreatedLaboratoryLoading(true));
   api().post('/admin/lecture/add', data).then(({ data }) => {
     batch(() => {
@@ -34,6 +34,7 @@ export const createLaboratory = (subjectId, data) => (dispatch) => {
     });
     history.push('/panel/laboratory');
   }).catch(err => {
+    console.log(err)
     const status = httpErrorHandler(err);
     dispatch(laboratorySlice.actions.setCreatedLaboratoryLoading(false));
   });

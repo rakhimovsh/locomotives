@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { Button, Form, Image, Input, Spin, Upload } from 'antd';
 
 import { getSingleNews, updateNews } from '../../redux/actions/news';
-import CkEditor from '../../components/CKEditor';
+import Editor from '../../components/RichEditor.jsx';
 import { getEditorImage } from '../../utils/api';
 
 
@@ -102,7 +102,7 @@ const EditNews = () => {
               </Item>
               <Item label="Ma`lumot qo`shish">
                 <EditorWrapper isVisible={isEditorEmpty}>
-                  <CkEditor handleChange={handleEditorChange} defaultValue={singleNews.text} />
+                  <Editor setValue={setEditorValue} defaultValue={singleNews.text} />
                 </EditorWrapper>
                 <EditorError isVisible={isEditorEmpty}>Maydon to`ldirilishi shart</EditorError>
               </Item>

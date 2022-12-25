@@ -5,7 +5,7 @@ import { Button, Form, Image, Input, Upload } from 'antd';
 import { ArrowLeftOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 
-import CkEditor from '../../components/CKEditor';
+import Editor from '../../components/RichEditor.jsx';
 import { createNews } from '../../redux/actions/news';
 
 const { Item } = Form;
@@ -90,7 +90,7 @@ const AddNews = () => {
         </Item>
         <Item label="Ma`lumot qo`shish">
           <EditorWrapper isVisible={isEditorEmpty}>
-            <CkEditor handleChange={handleEditorChange} />
+            <Editor setValue={setEditorValue} />
           </EditorWrapper>
           <EditorError isVisible={isEditorEmpty}>Maydon to`ldirilishi shart</EditorError>
         </Item>

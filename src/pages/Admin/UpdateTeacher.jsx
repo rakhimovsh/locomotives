@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import DefaultUser from '../../assets/images/default_user.png';
 import { getSingleTeacher, updateTeacher } from '../../redux/actions/teacher';
 import { getTeacherImage } from '../../utils/api';
-import CkEditor from '../../components/CKEditor';
+import Editor from '../../components/RichEditor.jsx';
 import CropEasy from '../../components/Crop/CropeEasy';
 import Loader from '../../components/Loader';
 
@@ -180,8 +180,7 @@ const TeacherHome = () => {
             loading.singleTeacher ?
               <Skeleton active={true} />
               :
-              <CkEditor defaultValue={singleTeacherInfo?.additionalInfo}
-                        handleChange={(_, editor) => setEditorValue(editor.getData())} />
+              <Editor defaultValue={singleTeacherInfo?.additionalInfo} setValue={setEditorValue}/>
           }
         </span>
       </AdditionalInfo>

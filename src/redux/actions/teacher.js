@@ -56,7 +56,7 @@ export const deleteTeacher = (id) => (dispatch) => {
 };
 
 export const getSingleTeacher = (teacherId) => (dispatch) => {
-  api().get(`/admin/teacher/one`).then(({ data }) => {
+  api().get(`/admin/teacher/one?teacher_id=${teacherId}`).then(({ data }) => {
     batch(() => {
       dispatch(teacherSlice.actions.setSingleTeacherLoading(false));
       dispatch(teacherSlice.actions.setSingleTeacher(data.data[0]));
@@ -64,9 +64,6 @@ export const getSingleTeacher = (teacherId) => (dispatch) => {
 
   }).catch(err => {
     const status = httpErrorHandler(err);
-    if (status === 400) {
-      history.push('panel/teachers/add2');
-    }
     dispatch(teacherSlice.actions.setSingleTeacherLoading(false));
   });
 };
@@ -74,7 +71,6 @@ export const getSingleTeacher = (teacherId) => (dispatch) => {
 export const updateTeacher = (info, image, teacherId) => (dispatch) => {
   dispatch(teacherSlice.actions.setUpdateTeacherLoading(true));
   const formData = new FormData();
-  console.log(info);
   for (let key in info) {
     formData.append(key, info[key]);
   }

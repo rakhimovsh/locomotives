@@ -6,13 +6,12 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { PlusOutlined } from '@ant-design/icons';
 import DefaultUser from '../../assets/images/default_user.png';
-import CKEditor from '../../components/CKEditor';
 import CropEasy from '../../components/Crop/CropeEasy';
 import { addTeacher } from '../../redux/actions/teacher';
+import Editor from "../../components/RichEditor.jsx";
 
 const { Item } = Form;
 const { TextArea } = Input;
-const { Option } = Select;
 
 const ImgWrapper = styled.div`
   border: 0.5px #191934 solid;
@@ -121,7 +120,7 @@ const AddTeacher = () => {
           </Col>
         </Row>
         <Item label="Qo`shimcha ma'lumot">
-          <CKEditor handleChange={(_, editor) => setEditorValue(editor.getData())} />
+          <Editor setValue={setEditorValue} />
         </Item>
         <Item>
           <Button type="primary" htmlType="submit">

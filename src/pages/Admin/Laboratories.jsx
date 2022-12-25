@@ -24,14 +24,14 @@ const Laboratories = () => {
   const dispatch = useDispatch();
   const { subjectId } = useParams();
   const navigate = useNavigate();
-  const { allLaboratories, loading } = useSelector(state => state.laboratory);
+  const { allLaboratories,createdLaboratory,updatedLaboratory,deletedLaboratory, loading } = useSelector(state => state.laboratory);
   const [page, setPages] = useState(1);
 
   const columns = LaboratoriesColumn(page, navigate, dispatch);
 
   useEffect(() => {
     dispatch(getAllLaboratories(subjectId));
-  }, [subjectId]);
+  }, [subjectId, createdLaboratory,updatedLaboratory, deletedLaboratory]);
 
   const handleNavigate = () => {
     navigate({

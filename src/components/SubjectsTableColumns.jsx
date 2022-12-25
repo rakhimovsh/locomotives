@@ -13,9 +13,7 @@ const BtnWrapper = styled.div`
   justify-content: center;
 `;
 
-export default function (setModalOpen, setSubject, navigate) {
-  const dispatch = useDispatch();
-  const { loading } = useSelector(state => state.subject);
+export default function (setModalOpen, setSubject, dispatch) {
   return [
     {
       title: 'Fan nomi',
@@ -33,13 +31,6 @@ export default function (setModalOpen, setSubject, navigate) {
         return `${record.course_id} - kurs`;
       },
     },
-    // {
-    //   title: 'Qo\'shimcha',
-    //   width: '150px',
-    //   render: (_, record) => {
-    //     return <Button icon={<PlusOutlined />}></Button>;
-    //   },
-    // },
     {
       title: 'Amallar',
       key: 'action',
@@ -58,7 +49,7 @@ export default function (setModalOpen, setSubject, navigate) {
             <Popconfirm placement="leftTop" title="O`chirishni tasdiqlaysizmi?"
                         onConfirm={confirm} okText="Ha"
                         cancelText="Yo`q">
-              <Button loading={loading.deleteSubject} type="primary" danger ghost icon={<DeleteOutlined />}></Button>
+              <Button type="primary" danger ghost icon={<DeleteOutlined />}></Button>
             </Popconfirm>
           </Space>
         );

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Button, Form, Input } from 'antd';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import CkEditor from '../../components/CKEditor';
+import Editor from '../../components/RichEditor.jsx';
 import { createLaboratory } from '../../redux/actions/laboratory.js';
 
 const { Item } = Form;
@@ -22,8 +22,13 @@ const AddLaboratory = () => {
 
   const handleFinish = (value) => {
     value.context = editorValue;
-    dispatch(createLaboratory(subjectId, value));
+    value.subject_id = subjectId
+    dispatch(createLaboratory(value));
   };
+
+  useEffect(()=>{
+
+  }, [laboratoryId])
 
   return (
     <Wrapper>
@@ -35,7 +40,7 @@ const AddLaboratory = () => {
           <Input placeholder="Sarlavha..." />
         </Item>
         <Item label="Asosiy ma'lumot" rules={[{ required: true }]}>
-          <CkEditor handleChange={(_, value) => setEditorValue(value.getData())} />
+          <Editor setValue={setEditorValue} />
         </Item>
 
         <Item>

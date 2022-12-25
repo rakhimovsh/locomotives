@@ -36,7 +36,7 @@ const Teachers = () => {
   const [singleTeacherInfo, setSingleTeacherInfo] = useState('');
   const dispatch = useDispatch();
   const { loading, allTeachers, totalPages, updatedTeacher, deletedTeacher } = useSelector(state => state.teacher);
-  const columns = TeacherColumns(setIsInfoModalOpen, currentPage, setSingleTeacherInfo);
+  const columns = TeacherColumns(setIsInfoModalOpen, currentPage, setSingleTeacherInfo, dispatch, navigate);
 
 
   useEffect(() => {

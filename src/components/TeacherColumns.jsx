@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux';
 import { deleteTeacher } from '../redux/actions/teacher';
 
 
-export default function (setIsInfoModalOpen, page, singleTeacherInfo) {
-  const dispatch = useDispatch();
+export default function (setIsInfoModalOpen, page, singleTeacherInfo, dispatch, navigate) {
+
 
   return [
     {
@@ -54,7 +54,7 @@ export default function (setIsInfoModalOpen, page, singleTeacherInfo) {
               setIsInfoModalOpen(true);
               singleTeacherInfo(record);
             }}></Button>
-            <Button type="primary" ghost icon={<EditOutlined />}></Button>
+            <Button onClick={()=> navigate(`/panel/teachers/update/${record["_id"]}`)} type="primary" ghost icon={<EditOutlined />}></Button>
 
             <Popconfirm placement="leftTop" title="O`chirishni tasdiqlaysizmi?" onConfirm={confirm} okText="Ha"
                         cancelText="Yo`q">
