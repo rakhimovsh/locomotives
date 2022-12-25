@@ -23,10 +23,18 @@ const BG = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 8px 8px 0 0;
+
+  @media screen and (max-width: 768px) {
+  height: 170px;
+    
+  }
 `;
 const CardWrapper = styled.div`
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   border-radius: 8px;
+  max-width: 300px;
+  margin: 0 auto;
+  margin-bottom: 10px;
 `;
 
 

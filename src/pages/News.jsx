@@ -8,7 +8,20 @@ import { getUserAllNews } from '../redux/actions/news';
 
 const Title = styled.h1`
   margin-top: 25px;
-  text-align: center
+  text-align: center;
+  @media screen and (max-width: 768px) {
+    font-size: 28px;
+  }
+`;
+const CusRow = styled(Row)`
+  margin-bottom: 40px;
+  @media screen and (max-width: 968px) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    margin-bottom: 40px;
+  }
 `;
 
 const PWrapper = styled.div`
@@ -30,15 +43,16 @@ const News = () => {
   return (
     <Container>
       <Title>Yangiliklar</Title>
-      <Row gutter={[16, 16]} style={{ marginBottom: 50 }}>
+      <CusRow gutter={[16, 20]}>
         {
           userAllNews?.map((news) => {
-            return <Col className="gutter-row" span={6} key={news['_id']}>
+            return (
+            <Col className="gutter-row" span={{ xs: 24, sm: 24, md: 6 }} key={news['_id']}>
               <NewsCard news={news} loading={loading.userAllNews} />
-            </Col>;
+            </Col>);
           })
         }
-      </Row>
+      </CusRow>
       <PWrapper><Pagination defaultCurrent={1} total={userTotalPages} onChange={(page) => setPage(page)} /></PWrapper>
     </Container>
   );

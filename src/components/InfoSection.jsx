@@ -24,6 +24,16 @@ const InfoWrapper = styled.div`
     color: var(--main-bg-color);
     font-weight: 700;
   }
+  @media screen and (max-width: 768px) {
+    & h2 {
+      font-size: 28px;
+      
+    }
+    & p{
+      font-size: 20px;
+
+    }
+  }
 `;
 
 

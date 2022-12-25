@@ -62,6 +62,12 @@ const RecentlyTop = styled.div`
   justify-content: space-between;
 `;
 
+const MyCol = styled(Col)`
+  /* @media screen and (min-width: 768px){
+    display: none;
+  } */
+`;
+
 const NewsInfo = () => {
   const { newsId } = useParams();
   const dispatch = useDispatch();
@@ -76,7 +82,7 @@ const NewsInfo = () => {
   return (
     <Container>
       <Row gutter={30} style={{ marginTop: 25 }}>
-        <Col className="gutter-row" span={17}>
+        <Col className="gutter-row" span={17} xs={24} sm={24} md={17}>
           {
             loading.userSingleNews ? <Skeleton /> :
               <ContentWrapper>
@@ -95,7 +101,7 @@ const NewsInfo = () => {
               </ContentWrapper>
           }
         </Col>
-        <Col className="gutter-row" span={7}>
+        <Col className="gutter-row" span={7} xs={0} sm={0} md={7}>
           <h2>So‘nggi yangiliklar</h2>
           <List>
             {

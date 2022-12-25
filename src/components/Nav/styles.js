@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link as Links} from 'react-router-dom';
 import { Drawer, Select } from 'antd';
 
 const NavEl = styled.nav`
@@ -66,7 +66,7 @@ const HamburgerBtn = styled.button`
   cursor: pointer;
 `;
 
-const MobileNavLink = styled(Link)`
+const MobileNavLink = styled(Links)`
   color: var(--main-bg-color);
 `;
 

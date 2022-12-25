@@ -12,6 +12,8 @@ const HeroSection = styled.section`
 `;
 
 
+
+
 const Hero = () => {
   return (<HeroSection>
       <Container>
