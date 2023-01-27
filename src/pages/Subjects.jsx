@@ -20,7 +20,7 @@ const CusRow = styled(Row)`
 `;
 
 const Card = styled.div`
-  max-width: 200px;
+  width: 200px;
   padding: 20px;
   display: flex;
   align-items: center;
@@ -82,10 +82,12 @@ const Subjects = () => {
             ]}
           />
         </div>
-        <CusRow gutter={20} style={{ marginTop: 35 }}>
+        {
+          userSubjects?.length == 0 ? "Ma'lumot topilmadi"
+          :
+          <CusRow gutter={20} style={{ marginTop: 35 }}>
           {userSubjects?.map((subject) => (
-            <>
-              <Col span={{ xs: 24, sm: 24, md: 3, lg: 3 }} key={subject["_id"]}>
+              <Col span={{ xs: 24, sm: 24, md: 3, lg: 3 }} key={subject?._id}>
                 <Card
                   onClick={() =>
                     navigate({
@@ -100,114 +102,9 @@ const Subjects = () => {
                   {subject?.name}
                 </Card>
               </Col>
-              <Col span={{ xs: 24, sm: 24, md: 3, lg: 3 }} key={subject["_id"]}>
-                <Card
-                  onClick={() =>
-                    navigate({
-                      pathname: "/laboratories",
-                      search: `?${createSearchParams({
-                        id: subject["_id"],
-                        name: subject.name,
-                      })}`,
-                    })
-                  }
-                >
-                  {subject?.name}
-                </Card>
-              </Col>
-              <Col span={{ xs: 24, sm: 24, md: 3, lg: 3 }} key={subject["_id"]}>
-                <Card
-                  onClick={() =>
-                    navigate({
-                      pathname: "/laboratories",
-                      search: `?${createSearchParams({
-                        id: subject["_id"],
-                        name: subject.name,
-                      })}`,
-                    })
-                  }
-                >
-                  {subject?.name}
-                </Card>
-              </Col>
-              <Col span={{ xs: 24, sm: 24, md: 3, lg: 3 }} key={subject["_id"]}>
-                <Card
-                  onClick={() =>
-                    navigate({
-                      pathname: "/laboratories",
-                      search: `?${createSearchParams({
-                        id: subject["_id"],
-                        name: subject.name,
-                      })}`,
-                    })
-                  }
-                >
-                  {subject?.name}
-                </Card>
-              </Col>
-              <Col span={{ xs: 24, sm: 24, md: 3, lg: 3 }} key={subject["_id"]}>
-                <Card
-                  onClick={() =>
-                    navigate({
-                      pathname: "/laboratories",
-                      search: `?${createSearchParams({
-                        id: subject["_id"],
-                        name: subject.name,
-                      })}`,
-                    })
-                  }
-                >
-                  {subject?.name}
-                </Card>
-              </Col>
-              <Col span={{ xs: 24, sm: 24, md: 3, lg: 3 }} key={subject["_id"]}>
-                <Card
-                  onClick={() =>
-                    navigate({
-                      pathname: "/laboratories",
-                      search: `?${createSearchParams({
-                        id: subject["_id"],
-                        name: subject.name,
-                      })}`,
-                    })
-                  }
-                >
-                  {subject?.name}
-                </Card>
-              </Col>
-              <Col span={{ xs: 24, sm: 24, md: 3, lg: 3 }} key={subject["_id"]}>
-                <Card
-                  onClick={() =>
-                    navigate({
-                      pathname: "/laboratories",
-                      search: `?${createSearchParams({
-                        id: subject["_id"],
-                        name: subject.name,
-                      })}`,
-                    })
-                  }
-                >
-                  {subject?.name}
-                </Card>
-              </Col>
-              <Col span={{ xs: 24, sm: 24, md: 3, lg: 3 }} key={subject["_id"]}>
-                <Card
-                  onClick={() =>
-                    navigate({
-                      pathname: "/laboratories",
-                      search: `?${createSearchParams({
-                        id: subject["_id"],
-                        name: subject.name,
-                      })}`,
-                    })
-                  }
-                >
-                  {subject?.name}
-                </Card>
-              </Col>
-            </>
           ))}
         </CusRow>
+        }
       </Wrapper>
     </Container>
   );

@@ -1,113 +1,112 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { Jodit } from 'jodit'
 import JoditReact from "jodit-react";
-// import ImageIcon from '../assets/images/card-image.svg'
 
-export const FileUpload = async (file) => {
+const FileUpload = async (file) => {
   let result = null;
 
   let formData = new FormData();
   formData.append('picture', file);
+  const response = await api().post(uploadApi, formData)
+  result = response?.data
 
-  await fetch(`http://146.190.84.52:3000/admin/upload/news/picture`, {
-    method: 'POST',
-    body: formData
-  })
-      .then((response) => response.json())
-      .then((data) => {
-        result = data?.data.fileName;
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  console.log(result);
   return result;
 }
+class JoditEditor extends React.Component {
 
-const RichEditor =({setValue, defaultValue})=>{
-  const [editorValue, setEditorValue] = React.useState('');
+    constructor(props) {
+        super(props)
 
-  useEffect(()=>{
-    setEditorValue(defaultValue)
-  }, [defaultValue])
-  const editorConfig = {
-    readonly: false,
-    autofocus: true,
-    tabIndex: 1,
+        this.state = {
+            editorContent: ''
+        }
 
-    askBeforePasteHTML: false,
-    askBeforePasteFromWord: false,
-    defaultActionOnPaste: 'insert_clear_html',
+        this.editorConfig = {
+            readonly: false,
+            autofocus: true,
+            tabIndex: 1,
 
-    placeholder: 'Write something awesome ...',
-    beautyHTML: true,
-    toolbarButtonSize: "large",
-    buttons: [
-      'source',
-      '|', 'bold', 'italic',
-      '|', 'ul', 'ol',
-      '|', 'font', 'fontsize', 'brush', 'paragraph',
-      '|', 'video', 'table', 'link',
-      '|', 'left', 'center', 'right', 'justify',
-      '|', 'undo', 'redo',
-      '|', 'hr', 'eraser', 'fullsize', "preview"
-    ],
-    extraButtons: ["uploadImage"]
-  }
-  function componentWillMount() {
-    uploadImageButton();
+            askBeforePasteHTML: false,
+            askBeforePasteFromWord: false,
+            defaultActionOnPaste: 'insert_clear_html',
 
-  }
-  function uploadImageButton (){
-    Jodit.defaultOptions.controls.uploadImage = {
-      name: 'Upload image to Cloudinary',
-      iconURL: ImageIcon,
-      exec: (async (editor) => {
-        await imageUpload(editor);
-      })
-    };
-  }
-  function imageUpload (editor) {
+            placeholder: 'Write something awesome ...',
+            beautyHTML: true,
+            toolbarButtonSize: "large",
+            buttons: [
+                'source',
+                '|', 'bold', 'italic',
+                '|', 'ul', 'ol',
+                '|', 'font', 'fontsize', 'brush', 'paragraph',
+                '|', 'video', 'table', 'link',
+                '|', 'left', 'center', 'right', 'justify',
+                '|', 'undo', 'redo',
+                '|', 'hr', 'eraser', 'fullsize'
+            ],
+            extraButtons: ["uploadImage"]
+        }
+    }
 
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
-    input.click();
-
-    input.onchange = async function () {
-
-      const imageFile = input.files[0];
-
-      if (!imageFile) {
-        return;
-      }
-
-      if (!imageFile.name.match(/\.(jpg|jpeg|png)$/)) {
-        return;
-      }
-
-      const imageInfo = await FileUpload(imageFile);
-
-      insertImage(editor, `http://146.190.84.52:3000/news/picture/${imageInfo}`);
+    componentWillMount() {
+        this.uploadImageButton();
 
     }
-  }
-  function insertImage  (editor, url)  {
-    const image = editor.selection.j.createInside.element('img');
-    image.setAttribute('src', url);
-    editor.selection.insertNode(image);
-  }
 
-   function onChange (value)  {setValue(value)}
+    uploadImageButton = () => {
+        Jodit.defaultOptions.controls.uploadImage = {
+            name: 'Upload image to Cloudinary',
+            iconURL: "https://www.kindpng.com/picc/m/261-2619141_cage-clipart-victorian-cloud-upload-icon-svg-hd.png",
+            exec: (async (editor) => {
+                await this.imageUpload(editor);
+            })
+        };
+    }
+    imageUpload = (editor) => {
 
-  return(
-      <JoditReact
-          value={editorValue}
-          config={editorConfig}
-          onChange={onChange}
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.click();
 
-      />
-  )
+        input.onchange = async function () {
+
+            const imageFile = input.files[0];
+
+            if (!imageFile) {
+                return;
+            }
+
+            if (!imageFile.name.match(/\.(jpg|jpeg|png)$/)) {
+                return;
+            }
+
+            const imageInfo = await FileUpload(imageFile);;
+
+            this.insertImage(editor, getEditorImage(imageInfo.data.fileName));
+
+        }.bind(this);
+    }
+
+    insertImage = (editor, url) => {
+        const image = editor.selection.j.createInside.element('img');
+        image.setAttribute('src', url);
+        editor.selection.insertNode(image);
+    }
+
+    onChange = (value) => { this.props.setValue(value)}
+
+
+    render() {
+        return (
+            <React.Fragment>
+                <JoditReact
+                    value={this.state.editorContent}
+                    config={this.editorConfig}
+                    onChange={this.onChange.bind(this)}
+                />
+            </React.Fragment>
+        )
+    }
 }
 
-export default RichEditor;
+export default JoditEditor;
