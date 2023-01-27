@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Search from "antd/es/input/Search";
 import { Avatar, Image, List, Pagination } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+
 
 import Container from "./Container";
 import { getUserAllTeachers } from "../redux/actions/teacher.js";
@@ -101,13 +103,13 @@ const TeachersSection = () => {
   const { user, userLoading } = useSelector((state) => state.teacher);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
+  const {t} = useTranslation()
+
   const onSearch = (value) => {
-    console.log(value);
     setSearch(value);
   };
   // let name = 
   // user.allTeachers.map(user =>console.log(user.firstName));
-  console.log(search,name);
 
   useEffect(() => {
     dispatch(getUserAllTeachers(page, search));
@@ -116,9 +118,9 @@ const TeachersSection = () => {
     <Section>
       <Container>
         <CustomSearch
-          placeholder="Ism bo`yicha izlash"
+          placeholder={t("teachersSec.inputPlaceholder")}
           allowClear
-          enterButton="Izlash"
+          enterButton={t("teachersSec.btn")}
           size="large"
           onSearch={onSearch}
         />

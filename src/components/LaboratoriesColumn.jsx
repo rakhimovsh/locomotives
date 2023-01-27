@@ -3,8 +3,12 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import React from 'react';
 import { deleteLaboratory } from '../redux/actions/laboratory';
 import { createSearchParams } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
+
 
 export default function (page, navigate, dispatch) {
+  const {t} = useTranslation()
+
   return [
     {
       title: 'No.',
@@ -13,22 +17,22 @@ export default function (page, navigate, dispatch) {
       render: (text, record, index) => (page - 1) * 10 + index + 1,
     },
     {
-      title: 'Sarlavha',
+      title: t("labsInfo.heading"),
       dataIndex: 'title',
       key: 'title',
     },
     {
-      title: 'Fan',
+      title: t("labsInfo.subject"),
       dataIndex: 'subjectName',
       key: 'subjectId',
     },
     {
-      title: 'Kurs',
+      title: t("labsInfo.course"),
       key: 'courseId',
-      render: (text) => `${text.courseId}-kurs`,
+      render: (text) => `${text.courseId}-${t("labsInfo.course").toLocaleLowerCase()}`,
     },
     {
-      title: 'Amallar',
+      title: t("labsInfo.actions"),
       key: 'action',
       render: (_, record) => {
         const confirmDelete = () => {

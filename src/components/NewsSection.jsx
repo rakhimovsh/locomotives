@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Col, Row } from "antd";
 import { useNavigate } from "react-router-dom";
 import NewsCard from "./NewsCard";
+import { useTranslation } from "react-i18next";
 
 import Container from "./Container";
 import { HomeNews } from "../redux/actions/news";
@@ -59,6 +60,7 @@ const Button = styled.button`
 `;
 
 const NewsSection = () => {
+  const {t} = useTranslation()
   const dispatch = useDispatch();
   const { newsHomePage, loading } = useSelector((state) => state.news);
   const navigate = useNavigate();
@@ -69,8 +71,8 @@ const NewsSection = () => {
   return (
     <Section>
       <NewsContainer>
-        <NewsTitle>Yangiliklar</NewsTitle>
-        <CusRow gutter={[16, 20]}>
+        <NewsTitle>{t("news.heading")}</NewsTitle>
+        <CusRow gutter={[16, 20]} >
           {newsHomePage?.map((news) => {
             return (
               <Col
@@ -83,7 +85,7 @@ const NewsSection = () => {
             );
           })}
         </CusRow>
-        <Button onClick={() => navigate("/news")}>Barcha yangiliklar</Button>
+        <Button onClick={() => navigate("/news")}>{t("news.btn")}</Button>
       </NewsContainer>
     </Section>
   );

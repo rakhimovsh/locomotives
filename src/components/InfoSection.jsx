@@ -2,8 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { Col, Divider, Row } from 'antd';
 import CountUp from 'react-countup';
+import { useTranslation } from 'react-i18next';
 
 import Container from './Container';
+
 
 const InfoSection = styled.section`
   padding: 20px 0;
@@ -38,6 +40,8 @@ const InfoWrapper = styled.div`
 
 
 const Info = () => {
+
+  const {t} = useTranslation()
   return (
     <InfoSection>
       <Container>
@@ -48,7 +52,7 @@ const Info = () => {
               <h2>
                 +<CountUp end={38} />
               </h2>
-              <p>O'qituvchilar</p>
+              <p>{t("info.teachers")}</p>
             </InfoWrapper>
           </Col>
           <Col className="gutter-row" xs={12} sm={8} md={8} lg={6} xl={6}>
@@ -56,7 +60,7 @@ const Info = () => {
               <h2>
                 +<CountUp end={1500} />
               </h2>
-              <p>Talabalar</p>
+              <p>{t("info.students")}</p>
             </InfoWrapper>
           </Col>
           <Col className="gutter-row" xs={12} sm={8} md={8} lg={6} xl={6}>
@@ -64,7 +68,7 @@ const Info = () => {
               <h2>
                 +<CountUp end={200} />
               </h2>
-              <p>Magistrlar</p>
+              <p>{t("info.magistrants")}</p>
             </InfoWrapper>
           </Col>
           <Col className="gutter-row" xs={12} sm={8} md={8} lg={6} xl={6}>
@@ -72,7 +76,7 @@ const Info = () => {
               <h2>
                 +<CountUp end={300} />
               </h2>
-              <p>Bitiruvchilar</p>
+              <p>{t("info.graduated")}</p>
             </InfoWrapper>
           </Col>
         </Row>

@@ -5,8 +5,30 @@
       "about": "О кафедре",
       "news": "Новости",
       "resources": "Научные ресурсы",
-      "teachers": "Учителя"
+      "teachers": "Учителя",
+      "lab": "Лаборатория"
+
     }
+  },
+  "info": {
+    "teachers": "Учителя",
+    "students": "Студенты",
+    "magistrants": "Магистранты",
+    "graduated": "Выпускники"
+  },
+  "news":{
+    "heading": "Hовости",
+    "btn": "Все Hовости"
+  },
+  "teachersSec": {
+    "inputPlaceholder": "Поиск по имени",
+    "btn": "Поиск"
+  },
+  "labsInfo": {
+    "heading": "Заголовок",
+    "subject": "Предмет",
+    "course": "Курс",
+    "actions": "Действия"
   },
   "footer": {
     "contact": "Связь",

@@ -6,6 +6,8 @@ import { getUserAllLaboratories } from '../redux/actions/laboratory.js';
 import Container from '../components/Container.jsx';
 import { Spin, Table } from 'antd';
 import { render } from 'react-dom';
+import { useTranslation } from "react-i18next";
+
 
 const Wrapper = styled.div`
   margin-top: 30px;

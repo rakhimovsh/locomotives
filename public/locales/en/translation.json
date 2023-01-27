@@ -5,8 +5,29 @@
       "about": "About the department",
       "news": "News",
       "resources": "Science resources",
-      "teachers": "Teachers"
+      "teachers": "Teachers",
+      "lab": "Labaratory"
     }
+  },
+  "info": {
+    "teachers": "Teachers",
+    "students": "Students",
+    "magistrants": "Maters",
+    "graduated": "Graduates"
+  },
+  "news":{
+    "heading": "News",
+    "btn": "All News"
+  },
+  "teachersSec": {
+    "inputPlaceholder": "Search by name",
+    "btn": "Search"
+  },
+  "labsInfo": {
+    "heading": "Heading",
+    "subject": "Subject",
+    "course": "Course",
+    "actions": "Actions"
   },
   "footer": {
     "contact": "Connection",

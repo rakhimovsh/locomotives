@@ -44,7 +44,7 @@ const Index = () => {
           <li><Navlink className={location.pathname == '/teachers' ? 'atived' : ''}
                        to="/teachers">{t('header.nav.teachers')}</Navlink></li>
           <li><Navlink className={location.pathname == '/subjects' ? 'atived' : ''}
-                       to="/subjects">Laboratoriya</Navlink></li>
+                       to="/subjects">{t('header.nav.lab')}</Navlink></li>
           <li><LanguageSelect /></li>
         </NavList>
       </NavEl>

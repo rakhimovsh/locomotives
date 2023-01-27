@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { Jodit } from 'jodit'
 import JoditReact from "jodit-react";
-import ImageIcon from '../assets/images/card-image.svg'
+// import ImageIcon from '../assets/images/card-image.svg'
 
 export const FileUpload = async (file) => {
   let result = null;

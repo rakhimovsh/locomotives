@@ -5,6 +5,8 @@ import { createSearchParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Container from "../components/Container.jsx";
 import { getSubjects, getUserSubjects } from "../redux/actions/subject.js";
+import { useTranslation } from "react-i18next";
+
 
 const Wrapper = styled.div`
   padding: 20px 0;
@@ -42,6 +44,8 @@ const Subjects = () => {
   const [course, setCourse] = useState(1);
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
+  const { t } = useTranslation()
+
 
   useEffect(() => {
     dispatch(getUserSubjects(page, course));
@@ -61,19 +65,19 @@ const Subjects = () => {
             options={[
               {
                 value: "1",
-                label: "1-kurs",
+                label: `1-${t("labsInfo.course").toLocaleLowerCase()}`,
               },
               {
                 value: "2",
-                label: "2-kurs",
+                label: `2-${t("labsInfo.course").toLocaleLowerCase()}`,
               },
               {
                 value: "3",
-                label: "3-kurs",
+                label: `3-${t("labsInfo.course").toLocaleLowerCase()}`,
               },
               {
                 value: "4",
-                label: "4-kurs",
+                label: `4-${t("labsInfo.course").toLocaleLowerCase()}`,
               },
             ]}
           />

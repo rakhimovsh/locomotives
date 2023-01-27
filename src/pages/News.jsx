@@ -5,6 +5,8 @@ import Container from '../components/Container';
 import { useDispatch, useSelector } from 'react-redux';
 import NewsCard from '../components/NewsCard';
 import { getUserAllNews } from '../redux/actions/news';
+import { useTranslation } from "react-i18next";
+
 
 const Title = styled.h1`
   margin-top: 25px;
@@ -33,6 +35,7 @@ const PWrapper = styled.div`
 
 
 const News = () => {
+  const {t} = useTranslation()
   const dispatch = useDispatch();
   const { userAllNews, loading, userTotalPages } = useSelector(state => state.news);
   const [page, setPage] = useState(1);
@@ -42,7 +45,7 @@ const News = () => {
   }, [page]);
   return (
     <Container>
-      <Title>Yangiliklar</Title>
+      <Title>{t("news.heading")}</Title>
       <CusRow gutter={[16, 20]}>
         {
           userAllNews?.map((news) => {

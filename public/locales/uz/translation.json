@@ -5,8 +5,29 @@
       "about": "Kafedra haqida",
       "news": "Yangiliklar",
       "resources": "Fan resurslari",
-      "teachers": "O`qituvchilar"
+      "teachers": "O`qituvchilar",
+      "lab" :"Labaratoriya"
     }
+  },
+  "info": {
+    "teachers": "O`qituvchilar",
+    "students": "Talabalar",
+    "magistrants": "Magistrlar",
+    "graduated": "Bitiruvchilar"
+  },
+  "news":{
+    "heading": "Yangiliklar",
+    "btn": "Barcha Yangiliklar"
+  },
+  "teachersSec": {
+    "inputPlaceholder": "Ism bo`yicha izlash",
+    "btn": "Izlash"
+  },
+  "labsInfo": {
+    "heading": "Sarlavha",
+    "subject": "Fan",
+    "course": "Kurs",
+    "actions": "Amallar"
   },
   "footer": {
     "contact": "Bog'lanish",

@@ -106,7 +106,7 @@ const TeacherSection = () => {
           </Wrapper>
         </Container>
       ) : (
-        <></>
+        <>Data not found</>
       )}
     </>
   );
