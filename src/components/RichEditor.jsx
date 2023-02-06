@@ -1,13 +1,15 @@
 import React from 'react';
 import { Jodit } from 'jodit'
 import JoditReact from "jodit-react";
+import { api, getEditorImage } from '../utils/api';
+
 
 const FileUpload = async (file) => {
   let result = null;
 
   let formData = new FormData();
   formData.append('picture', file);
-  const response = await api().post(uploadApi, formData)
+  const response = await api().post("/admin/upload/news/picture", formData)
   result = response?.data
 
   return result;
@@ -47,7 +49,7 @@ class JoditEditor extends React.Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.uploadImageButton();
 
     }

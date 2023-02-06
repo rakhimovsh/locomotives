@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import NewsCard from '../components/NewsCard';
 import { getUserAllNews } from '../redux/actions/news';
 import { useTranslation } from "react-i18next";
+import { Spin } from 'antd';
+
+import NotFound from '../components/NotFound';
 
 
 const Title = styled.h1`
@@ -33,12 +36,18 @@ const PWrapper = styled.div`
   margin: 50px 0;
 `;
 
+const CusSpin = styled(Spin)`
+  margin: 0 auto;
+`
+
 
 const News = () => {
   const {t} = useTranslation()
   const dispatch = useDispatch();
   const { userAllNews, loading, userTotalPages } = useSelector(state => state.news);
   const [page, setPage] = useState(1);
+
+  console.log(loading.userAllNews)
 
   useEffect(() => {
     dispatch(getUserAllNews(page));
@@ -48,12 +57,12 @@ const News = () => {
       <Title>{t("news.heading")}</Title>
       <CusRow gutter={[16, 20]}>
         {
-          userAllNews?.map((news) => {
+          loading.userAllNews ? <CusSpin size="large" /> : userAllNews.length ? userAllNews?.map((news) => {
             return (
             <Col className="gutter-row" span={{ xs: 24, sm: 24, md: 6 }} key={news['_id']}>
               <NewsCard news={news} loading={loading.userAllNews} />
             </Col>);
-          })
+          }) : <NotFound/>
         }
       </CusRow>
       <PWrapper><Pagination defaultCurrent={1} total={userTotalPages} onChange={(page) => setPage(page)} /></PWrapper>

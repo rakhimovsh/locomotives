@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Col, Image, List, Row } from "antd";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import Container from "./Container.jsx";
 import { getUserSingleTeacher } from "../redux/actions/teacher.js";
 import { getTeacherImage } from "../utils/api.js";
+import NotFound from "./NotFound.jsx";
 
 const Wrapper = styled.div`
   margin-bottom: 40px;
@@ -55,12 +57,19 @@ const Title = styled.h2`
   }
 `;
 
+const tr = {
+  "uz": "63e11d7a66c8351bae7fefc3",
+  "ru": "63e13451b43bf7c727278ae2",
+  "en": "63e13506b43bf7c727278b00"
+}
+
 const TeacherSection = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.teacher);
+  const {i18n, t} = useTranslation()
 
   useEffect(() => {
-    dispatch(getUserSingleTeacher("63a53e2641eab24e19c4ffad"));
+    dispatch(getUserSingleTeacher(tr[i18n.language]));
   }, []);
   const teacher = user.singleTeacher;
 
@@ -70,7 +79,7 @@ const TeacherSection = () => {
         <Container>
           <Wrapper>
             <h2 className="title" style={{ margin: "30px 0" }}>
-              Kafedra mudiri
+            {t("teacherHead.title")}
             </h2>
             <Row gutter={20}>
               <Col className="gutter-row" span={{ xs: 24, sm: 24, md: 10 }}>
@@ -80,7 +89,7 @@ const TeacherSection = () => {
                 <List itemLayout="horizontal">
                   <Item>
                     <Title>
-                      F.I.Sh:{" "}
+                      {t("teacherHead.nameInfo")}:{" "}
                       <span>
                         {teacher.lastName +
                           " " +
@@ -106,7 +115,7 @@ const TeacherSection = () => {
           </Wrapper>
         </Container>
       ) : (
-        <>Data not found</>
+        <NotFound/>
       )}
     </>
   );

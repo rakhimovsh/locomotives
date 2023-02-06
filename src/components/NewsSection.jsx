@@ -70,7 +70,7 @@ const NewsSection = () => {
   }, []);
   return (
     <Section>
-      <NewsContainer>
+      {newsHomePage?.length ? <NewsContainer>
         <NewsTitle>{t("news.heading")}</NewsTitle>
         <CusRow gutter={[16, 20]} >
           {newsHomePage?.map((news) => {
@@ -86,7 +86,7 @@ const NewsSection = () => {
           })}
         </CusRow>
         <Button onClick={() => navigate("/news")}>{t("news.btn")}</Button>
-      </NewsContainer>
+      </NewsContainer> : <></>}
     </Section>
   );
 };

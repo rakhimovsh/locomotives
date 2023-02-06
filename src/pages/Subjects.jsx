@@ -8,9 +8,13 @@ import { getSubjects, getUserSubjects } from "../redux/actions/subject.js";
 import { useTranslation } from "react-i18next";
 
 
+import NotFound from "../components/NotFound.jsx";
+
 const Wrapper = styled.div`
   padding: 20px 0;
 `;
+
+
 const CusRow = styled(Row)`
   width: 100%;
   margin: 0 auto;
@@ -83,7 +87,7 @@ const Subjects = () => {
           />
         </div>
         {
-          userSubjects?.length == 0 ? "Ma'lumot topilmadi"
+          userSubjects?.length == 0 ? <NotFound/>
           :
           <CusRow gutter={20} style={{ marginTop: 35 }}>
           {userSubjects?.map((subject) => (
