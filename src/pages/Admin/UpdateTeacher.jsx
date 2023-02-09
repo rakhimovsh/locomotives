@@ -117,7 +117,6 @@ const TeacherHome = () => {
   if (loading.updateTeacher) {
     return <Loader />;
   }
-
   return (
     <Form
       form={form}

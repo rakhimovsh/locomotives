@@ -58,9 +58,9 @@ const Title = styled.h2`
 `;
 
 const tr = {
-  "uz": "63e11d7a66c8351bae7fefc3",
-  "ru": "63e13451b43bf7c727278ae2",
-  "en": "63e13506b43bf7c727278b00"
+  "uz": "63e53d4ca6e91135b33588bc",
+  "ru": "63e53f1ba6e91135b33588da",
+  "en": "63e543c02ddec0416dddc106"
 }
 
 const TeacherSection = () => {

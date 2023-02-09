@@ -20,7 +20,7 @@ class JoditEditor extends React.Component {
         super(props)
 
         this.state = {
-            editorContent: ''
+            editorContent: this.props.defaultValue ? this.props.defaultValue  :""
         }
 
         this.editorConfig = {
